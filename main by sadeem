@@ -1,0 +1,60 @@
+#this is a main
+from CaesarCipher import encrypt, decrypt
+from Cryptanalysis import find_key
+
+
+def read_key():
+    # keep asking until the user enters a valid number between 0 and 25
+    while True:
+        try:
+            key = int(input("Enter shift key (0-25): "))
+            if 0 <= key <= 25:
+                return key
+            print("Key must be between 0 and 25.")
+        except ValueError:
+            print("Please enter a valid number.")
+
+
+def main():
+    while True:
+        print("\n===== Caesar Cipher Project =====")
+        print("1. Encryption")
+        print("2. Decryption")
+        print("3. Cryptanalysis (Known-Plaintext Attack)")
+        print("4. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            plaintext = input("Enter plaintext: ")
+            key = read_key()
+            ciphertext = encrypt(plaintext, key)
+            print("Ciphertext:", ciphertext)
+
+        elif choice == "2":
+            ciphertext = input("Enter ciphertext: ")
+            key = read_key()
+            plaintext = decrypt(ciphertext, key)
+            print("Plaintext:", plaintext)
+
+        elif choice == "3":
+            plaintext = input("Enter known plaintext: ")
+            ciphertext = input("Enter its ciphertext: ")
+            key = find_key(plaintext, ciphertext)
+
+            if key is not None:
+                print("Key found:", key)
+                print("Decrypted text:", decrypt(ciphertext, key))
+            else:
+                print("Could not determine the key.")
+
+        elif choice == "4":
+            print("Exiting program...")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if __name__ == "__main__":
+    main()
