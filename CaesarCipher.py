@@ -28,8 +28,4 @@ def decrypt(ciphertext, key):
     return shift_text(ciphertext, -key)
 
 
-# quick test
-if __name__ == "__main__":
-    c = encrypt("Hello World", 3)
-    print(c)                # Khoor Zruog
-    print(decrypt(c, 3))    # Hello World
+
